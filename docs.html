@@ -1,0 +1,830 @@
+<!DOCTYPE html><html lang="en-US"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Documentation - Papyrus</title><meta name="author" content="Niklas Rosenqvist"><meta name="description" content="An easy-to-use markdown CMS that only requires a PHP capable web server. It&#x27;s design is developer-oriented so it provides an easily extendable base that allows for any additional functionality you may need. The whole PHP ecosystem is at your disposal."><meta name="keywords" content="cms, papyrus, markdown, flat-file, php, developer friendly, revision control, documentation"><meta name="og:type" content="website"><meta name="og:locale" content="en-US"><meta name="og:title" content="Documentation - Papyrus"><meta name="og:description" content="An easy-to-use markdown CMS that only requires a PHP capable web server. It&#x27;s design is developer-oriented so it provides an easily extendable base that allows for any additional functionality you may need. The whole PHP ecosystem is at your disposal."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@nsrosenqvist"><meta name="twitter:creator" content="@nsrosenqvist"><meta name="twitter:title" content="Documentation - Papyrus"><meta name="twitter:description" content="An easy-to-use markdown CMS that only requires a PHP capable web server. It&#x27;s design is developer-oriented so it provides an easily extendable base that allows for any additional functionality you may need. The whole PHP ecosystem is at your disposal."><link rel="canonical" href="https://soma-php.github.io/papyrus/docs.html"><link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://soma-php.github.io/papyrus/main.886e5e11.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/vs2015.min.css"></head><body class="parallax-container docs"> <nav id="menu" class="sticky-top navbar navbar-light navbar-expand-sm"> <div class="container"> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible-menu" aria-controls="collapsible-menu" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button> <span class="navbar-brand ml-auto ml-sm-none"> <a href="https://soma-php.github.io/papyrus/#"><img src="https://soma-php.github.io/papyrus/icon-512.2db09f7f.png" alt="Papyrus icon" id="logo"></a> </span> <div class="collapse navbar-collapse" id="collapsible-menu"> <ul class="navbar-nav ml-auto"> <li class="nav-item mx-1"> <a class="nav-link py-3" href="https://soma-php.github.io/papyrus/" target="_self"> <i data-feather="help-circle"></i> About </a> </li> <li class="nav-item mx-1"> <a class="nav-link py-3" href="https://soma-php.github.io/papyrus/docs.html" target="_self"> <i data-feather="book"></i> Docs </a> </li> <li class="nav-item mx-1"> <a class="nav-link py-3" href="https://github.com/soma-php/papyrus" target="_blank"> <i data-feather="tool"></i> Development </a> </li> <li class="nav-item mx-1"> <a class="nav-link py-3" href="https://github.com/soma-php/papyrus/issues" target="_blank"> <i data-feather="alert-triangle"></i> Issues </a> </li> </ul> </div> </div> </nav> <header id="header"> <div id="hero" class="text-center"> <div class="col-xl-7 col-lg-8 col-md-9 col-sm-12 mx-auto my-5"> <h1>Documentation</h1> </div> </div> </header> <main id="main"> <section class="section-p"> <div class="container"> <div class="row"> <div class="col-md-3 mb-4 mb-md-0"> <nav class="list-group" role="tablist"> <a href="#p-00-introduction" class="list-group-item list-group-item-action" data-toggle="list" role="tab"> Introduction </a> <a href="#p-01-getting-started" class="list-group-item list-group-item-action" data-toggle="list" role="tab"> Getting started </a> <a href="#p-02-configuration" class="list-group-item list-group-item-action" data-toggle="list" role="tab"> Configuration </a> <a href="#p-03-pages" class="list-group-item list-group-item-action" data-toggle="list" role="tab"> Pages and routing </a> <a href="#p-04-menus" class="list-group-item list-group-item-action" data-toggle="list" role="tab"> Menus </a> <a href="#p-05-themes" class="list-group-item list-group-item-action" data-toggle="list" role="tab"> Themes </a> <a href="#p-06-commands" class="list-group-item list-group-item-action" data-toggle="list" role="tab"> Commands </a> <a href="#p-07-advanced" class="list-group-item list-group-item-action" data-toggle="list" role="tab"> Advanced </a> <a href="#p-08-api" class="list-group-item list-group-item-action" data-toggle="list" role="tab"> API </a> <a href="#p-09-roadmap" class="list-group-item list-group-item-action" data-toggle="list" role="tab"> Roadmap </a> <a href="#p-99-helpers" class="list-group-item list-group-item-action" data-toggle="list" role="tab"> Helper functions </a> </nav> </div> <div class="col-md-9"> <div id="docs-content" class="tab-content"> <div id="p-00-introduction" class="tab-pane fade" role="tabpanel"> <html><head></head><body><h2 id="p-00-introduction_introduction">Introduction</h2>
+<p>Why yet another markdown CMS, you ask? I want my publishing experience to be as hassle free as possible. Writing a blog post should be as simple as editing a Word document and having it automatically backup to the cloud. When I add an image to a blog post I shouldn&apos;t have to preprocess and resize it but the program should to take care of that for me. I also want the coding experience to be enjoyable and not having to dread adding features or fixing bugs on the website.</p>
+<p>The target audience of this project is primarily developers so instead of having to create custom plugins for minor and/or major features, everything can be easily baked into the theme so that there&apos;s only one project the developer needs to worry about. Perhaps controversially it&apos;s encouraged to include logic in the theme files and they can be installed, along with their dependencies, via <a href="https://getcomposer.org/">composer</a>, making the entire PHP ecosystem at the theme developer&apos;s disposal (although one can still separate out the logic and integrate it using a service provider if one would prefer doing so).</p>
+<p>From personal experience, the real headache for smaller teams is not having logic mixed in with presentation but having to maintain separate repositories, keeping them in sync, and especially keeping presentation and content easiliy migratable and not dependent on each other. In Wordpress, pushing an update from one environment to another involves updating the site configuration and content, and pushing plugins and theme changes. The former two are entangled in one database, and the latter two are kept at different repositories but are entirely dependent on each other. Separating the concerns more simply between, <em>code</em>, <em>configuration</em> and <em>content</em>, in my opinion makes for a simpler more enjoyable developer experience.</p>
+<p>So that was the motivation and requirements of the project. I&apos;m sure it&apos;s not up to all coding standards or best practices but Papyrus satisfies all of the requirements for me and I&apos;m releasing it in case it can be of benefit to someone else as well. Thanks for checking it out!</p>
+<h3 id="p-00-introduction_soma">SOMA</h3>
+<p>SOMA is a framework that evolved while creating Papyrus. It&apos;s designed to provide the bare minimum and allow the developer to pick and choose components modularly, but still provide all modern conveniences to the workflow. So it&apos;s the very core of Papyrus and therefore it&apos;d be good to quickly read through its <a href="https://soma-php.github.io/">documentation</a> as well to understand how it works, especially how service providers are implemented.</p>
+</body></html> </div> <div id="p-01-getting-started" class="tab-pane fade" role="tabpanel"> <html><head></head><body><h2 id="p-01-getting-started_getting-started">Getting started</h2>
+<h3 id="p-01-getting-started_server-requirements">Server requirements</h3>
+<p>Papyrus has a few system requirements and you will need to make sure your server meets the following:</p>
+<ul>
+<li>PHP &gt;= 7.2.5</li>
+<li>JSON PHP Extension</li>
+<li>Mbstring PHP Extension</li>
+<li>GD PHP Extension (or alternatively Imagick)</li>
+<li>XML PHP Extension</li>
+</ul>
+<h3 id="p-01-getting-started_installation">Installation</h3>
+<p><em>Papyrus requires composer for dependency management</em></p>
+<p>Create a new project by executing the following command in a terminal:</p>
+<pre><code class="lang-sh">composer create-project soma/papyrus-project [project-directory]
+</code></pre>
+<p>The required paths need to be created by the framework before you can run Papyrus. You can do so by running the <code>app:install</code> command after you&apos;ve configured your <code>.env</code>.</p>
+<pre><code class="lang-sh">php appctrl app:install
+</code></pre>
+<h3 id="p-01-getting-started_integrate-into-an-existing-project">Integrate into an existing project</h3>
+<p>One can also add the library to an already existing SOMA project and simply register the &quot;meta&quot; provider that registers all services Papyrus is composed of:</p>
+<pre><code class="lang-sh">composer require soma/papyrus
+</code></pre>
+<pre><code class="lang-php">return [
+    // ...
+    &apos;providers&apos; =&gt; [
+        \Papyrus\Providers\PapyrusProvider::class,
+    ],
+    &apos;aliases&apos; =&gt; [
+        &apos;Content&apos; =&gt; \Papyrus\Facades\Content::class,
+        &apos;Themes&apos; =&gt; \Papyrus\Facades\Themes::class,
+    ],
+    &apos;commands&apos; =&gt; [
+        \Soma\Commands\AppInstall::class,
+        \Soma\Commands\AppUninstall::class,
+        \Soma\Commands\AppRefresh::class,
+        \Soma\Commands\AppTinker::class,
+        \Soma\Commands\AppServe::class,
+        \Soma\Commands\AppClearCache::class,
+        \Papyrus\Commands\ContentRoutes::class,
+        \Papyrus\Commands\ContentCompile::class,
+    ],
+    // ...
+];
+</code></pre>
+<h3 id="p-01-getting-started_helpers">Helpers</h3>
+<p>The file <a href="https://github.com/soma-php/papyrus/blob/master/src/helpers.php">helpers.php</a> contain a couple of functions that are meant to simplify either calling app services or work with certain types of data. Please also refer to the <a href="https://soma-php.github.io/">helpers provided by Soma</a>.</p>
+</body></html> </div> <div id="p-02-configuration" class="tab-pane fade" role="tabpanel"> <html><head></head><body><h2 id="p-02-configuration_configuration">Configuration</h2>
+<h3 id="p-02-configuration_setup">Setup</h3>
+<p>All essential configuration is set in the <code>.env</code> file in the root of your project:</p>
+<pre><code class="lang-sh">APP_URL=&quot;http://localhost:8000&quot;
+APP_STAGE=&quot;development&quot;
+APP_TIMEZONE=&quot;Europe/Stockholm&quot;
+APP_DEBUG=true
+APP_OPTIMIZE=true
+APP_CONFIG=&quot;/absolute/path/to/your/config/folder&quot;
+APP_STORAGE=&quot;/absolute/path/to/your/storage/folder&quot;
+APP_CONTENT=&quot;/absolute/path/to/your/content/folder&quot;
+APP_THEMES=&quot;/absolute/path/to/your/themes/folder&quot;
+</code></pre>
+<p><em>The storage directory needs to be writable by the application.</em></p>
+<p><em>APP_DEBUG</em> should only be set if you&apos;re actively debugging the application since it will slow down the website&apos;s performance noticeably. <em>APP_OPTIMIZE</em> should always be enabled when running in a live production environment, otherwise no files will be cached and content processing will likely tank your servers performance.</p>
+<p>There&apos;s no need for the project to be all together in the same directory, <em>public</em> is the web root and the <code>.env</code> should preferable be in the parent directory. The <em>content</em> can be a git repository or simply a Dropbox folder synced to your server and the content will be compiled and cached in <em>storage</em>. The following however is a recommended project structure:</p>
+<pre><code class="lang-text">Project/
+-- config/
+-- -- app.php
+-- content/
+-- -- index.md
+-- -- config.yml
+-- -- menus.yml
+-- public/
+-- -- index.php
+-- storage/
+-- themes/
+-- .env
+-- appctrl
+-- composer.json
+</code></pre>
+<p>The environment variables are primarily used internally by SOMA or Papyrus but can also be accessed using the included helper functions.</p>
+<h3 id="p-02-configuration_configuration-keys">Configuration keys</h3>
+<p>The <em>config</em> folder contains all the configuration files for your project. However, any keys you set in <code>config.yml</code> in the root of your content folder will override keys in the <code>content</code> config namespace. This is the recommended place to put variables that changes the rendering of your content and behavior of your site. Theme specific settings are recommended to be embedded into the theme manifest (refer to the theme documentation).</p>
+<p>The full list of keys supported by default are as follows and these can just as well be set via <code>content/config.yml</code>:</p>
+<pre><code class="lang-php">return [
+    &apos;title&apos; =&gt; &apos;My Site&apos;,
+    &apos;language&apos; =&gt; &apos;en_US&apos;,
+    &apos;description&apos; =&gt; &apos;My personal blog&apos;,
+
+    // Default author for published contents, this can be overriden for each page
+    &apos;author&apos; =&gt; &apos;John Doe&apos;,
+
+    // &apos;timezone&apos; should be one of the PHP supported: https://www.php.net/manual/en/timezones.php
+    &apos;timezone&apos; =&gt; &apos;Europe/Stockholm&apos;,
+
+    // &apos;date-format&apos; sets the default format used by the format_date helper. 
+    // If false or missing then the default format is the ISO-8601 standard: YYYY-MM-DD
+    &apos;date-format&apos; =&gt; false,
+
+    // Adds the option to type-cast specific meta keys
+    &apos;meta&apos; =&gt; [
+        &apos;dates&apos; =&gt; [&apos;published&apos;, &apos;birthday&apos;],
+        &apos;booleans&apos; =&gt; [&apos;featured&apos;],
+        &apos;integers&apos; =&gt; [&apos;order&apos;],
+    ],
+
+    // If you enable drafts you can view the draft in the web browser
+    // by appending &quot;?preview=true&quot; to the URL.
+    &apos;drafts&apos; =&gt; true,
+
+    // Sets the default number of posts per page if you call paginate
+    // via ContentManager or the paginate helper.
+    &apos;pagination&apos; =&gt; 10,
+
+    // Sets the page that will be shown if no page can be found
+    &apos;404&apos; =&gt; &apos;/404.md&apos;,
+
+    // Settings for the built-in content search functionality
+    &apos;search&apos; =&gt; [
+        &apos;low_value&apos; =&gt; [&apos;is&apos;, &apos;a&apos;, &apos;the&apos;, &apos;in&apos;, &apos;he&apos;, &apos;she&apos;, &apos;it&apos;, &apos;its&apos;, &apos;and&apos;],
+        &apos;exclude&apos; =&gt; [
+            &apos;pages/sub&apos;
+        ],        
+    ],
+
+    // The router can be disabled if you want to implement you own
+    // custom logic for all requests by setting this key to false
+    &apos;router&apos; =&gt; [
+        // Handlers are callables that take a string and a Symfony Request
+        // as arguments and return a boolean indicating whether
+        // they handled the request or not. Check the advanced documentation
+        // for more information.
+        &apos;handlers&apos; =&gt; [],
+    ],
+
+    // Settings affecting the RSS feed. If &apos;feed&apos; is set to false
+    // then the built-in route handler for RSS feeds will
+    // not be registered at all
+    &apos;feed&apos; =&gt; [
+        &apos;route&apos; =&gt; &apos;/feed&apos;,
+        &apos;mode&apos; =&gt; &apos;excerpt&apos;,
+        // &apos;filter&apos; will be run against the \Illuminate\Support\Collection instance
+        // of pages so that custom logic can do more advanced filtering
+        &apos;filter&apos; =&gt; function($val, $key) {
+            return true;
+        },
+        &apos;sort&apos; =&gt; &apos;published&apos;,
+        &apos;order&apos; =&gt; &apos;asc&apos;,
+        &apos;include&apos; =&gt; [],
+        &apos;exclude&apos; =&gt; [],
+        // &apos;image&apos; should be either an absolute URL or a relative path to a file
+        // within the content directory.
+        &apos;image&apos; =&gt; &apos;my-feed-logo.jpg&apos;,
+    ],
+
+    // If &apos;images&apos; is set to false then all automatic image processing will be disabled
+    &apos;images&apos; =&gt; [
+        // This value changes what image processing driver will be used,
+        // &apos;gd&apos; and &apos;imagick&apos; are supported.
+        &apos;driver&apos; =&gt; &apos;gd&apos;,
+        // Sets the image quality used in all automatic image processing
+        &apos;quality&apos; =&gt; 80,
+        &apos;filters&apos; =&gt; [
+            // Filters need to be callable as with the content.filters
+            // and can also be set via the theme manifest
+            &apos;example-filter&apos; =&gt; \MyTheme\MyImageFilter::class,
+        ],
+    ],
+
+    // Content filters (see explanation)
+    &apos;filters&apos; =&gt; [
+        &apos;anchors&apos; =&gt; \Papyrus\Content\Filters\AnchorFilter::class,
+        &apos;images&apos; =&gt; \Papyrus\Content\Filters\ImageFilter::class,
+        &apos;includes&apos; =&gt; \Papyrus\Content\Filters\ContentIncludesFilter::class,
+        &apos;hashtags&apos; =&gt; \Papyrus\Content\Filters\HashtagFilter::class,
+        &apos;heading-id&apos; =&gt; \Papyrus\Content\Filters\HeadingIdFilter::class,
+        &apos;heading-offset&apos; =&gt; \Papyrus\Content\Filters\HeadingOffsetFilter::class,
+        &apos;shortcodes&apos; =&gt; \Papyrus\Content\Filters\ShortcodeFilter::class,
+        &apos;smartypants&apos; =&gt; \Papyrus\Content\Filters\SmartyPantsFilter::class,
+    ],
+
+    // Page mixins (see explanation)
+    &apos;mixins&apos; =&gt; [
+        \My\Custom\Mixin::class,
+    ],
+
+    // Filter settings (see explanation)
+    &apos;tag-route&apos; =&gt; &apos;/tag?t=&apos;,
+    &apos;includes&apos; =&gt; [
+        &apos;markdown&apos; =&gt; [
+            &apos;after&apos; =&gt; &apos;/signature.md&apos;,
+        ],
+        &apos;html&apos; =&gt; [
+            &apos;before&apos; =&gt; &apos;/ads/advertisement.html&apos;
+        ],
+    ],
+
+    // Cache settings (see explanation)
+    &apos;cache&apos; =&gt; [
+        &apos;ignore-mtime&apos; =&gt; true,
+        &apos;validate-visited&apos; =&gt; true,
+        &apos;gateway&apos; =&gt; false,
+        &apos;full-page&apos; =&gt; true,
+        &apos;time&apos; =&gt; 3600,
+        &apos;include&apos; =&gt; false,
+        &apos;exclude&apos; =&gt; [
+            &apos;feed&apos;
+        ],
+    ],
+];
+</code></pre>
+<p>Config is most easily retrieved by the config helper using dot notation, the first level being the config file name:</p>
+<pre><code class="lang-php">$siteTitle = config(&apos;content.title&apos;, &apos;Default value&apos;);
+</code></pre>
+<h4 id="p-02-configuration_imagesfilters">images.filters</h4>
+<p>Image filters need to be callables with the following definition:</p>
+<pre><code class="lang-php">function(\Papyrus\Content\Image $image) {
+  
+    // ...
+
+    return $image;
+}
+</code></pre>
+<h4 id="p-02-configuration_filters">filters</h4>
+<p>Content filters are pre and post processors for the markdown content. The default ones add support for links to other content or static resources, responsive image resizing, id attribute on headings, heading offset and shortcodes. Some filter settings that are related to presentation are set in the theme manifest. Shortcodes require further logic and should be registered by a <em>Service Provider</em> (see the advanced documentation). Further information regarding the filters and their definition can be found under the <em>Pages</em> documentation.</p>
+<h4 id="p-02-configuration_mixins">mixins</h4>
+<p>Mixins are a way to extend the functionality of the <em>Page</em> class. Refer to the advanced documentation for more information.</p>
+<h4 id="p-02-configuration_tag-route">tag-route</h4>
+<p>Used by the <em>hashtags</em> filter and sets the route which will be prefixed onto the tag string for the generated anchor.</p>
+<h4 id="p-02-configuration_includes">includes</h4>
+<p>Enables automatic content insertion into every page. The content can either be markdown or pre-formatted html and the options are to either append or prepend it to the content. The value should be either a path relative to the <em>content</em> directory or an array of such paths.</p>
+<h4 id="p-02-configuration_cache">cache</h4>
+<p>Performance can be improved by adjusting the cache behavior. <code>ignore-mtime</code> disables checking the modification date of the file and only forces a recompile if the file is missing completely. If this is set one must manually perform a recompilation in order to reflect content updates which could be performed by a schedule server job. <code>validate-visited</code> modifies that behavior to just validate the page being requested, so that other files (like when showing an archive on an index page) won&apos;t be recompiled until they are directly visited and this is a reasonable performance optimization which is recommended to turn on. Refer to the advanced documentation for more on performance and how Papyrus loads content.</p>
+<p>If you have a HTTP cache gateway configured you can set the correct headers on the response by setting <code>gateway</code> to true. Alternatively you can use the <code>full-page</code> cache that is a simple cache system that bypasses most of Papyrus&apos; subsystems and returns a previously rendered response to an URI request if it exists and is not older than <code>time</code> in seconds.</p>
+<p>You can also set what routes you want to be cacheable using the <code>include</code> and <code>exclude</code> lists. <em>Include</em> runs first and if the beginning of the route doesn&apos;t match the configured filter then it won&apos;t be cached. You can also <em>exclude</em> to filter out specific routes within the included set.</p>
+</body></html> </div> <div id="p-03-pages" class="tab-pane fade" role="tabpanel"> <html><head></head><body><h2 id="p-03-pages_pages-and-routing">Pages and routing</h2>
+<p>The body of the page files are formatted using <a href="https://www.markdownguide.org/">Markdown</a> and the meta using a <a href="https://learnxinyminutes.com/docs/yaml/">YAML</a> header section, other static CMS&apos;s usually uses a term borrowed from the publishing industry and call this the &quot;front matter&quot;. The meta keys &quot;keywords&quot; and can be defined using a comma separated list and created as an array even though it&apos;s not a valid YAML array. This is purely for convenience sake and what keys are to be treated like this can be configured by the static array <code>\Papyrus\Content\Page::$metaCommaArrays</code> (also configurable with the config key <code>content.meta.comma-arrays</code>). The first character of each key is also made lowercase.</p>
+<p>Here&apos;s an example of what a file could look like:</p>
+<pre><code class="lang-text">---
+Title: About
+Keywords: Who I am, developer, photography
+Author: John Doe
+Template: page
+Published: 2019-07-01
+---
+# About me
+
+Commodi qui sed laudantium quaerat est. Fugit temporibus occaecati ut quos nesciunt in assumenda veritatis. Architecto blanditiis similique odit. Sequi repellat sunt aut. In mollitia et occaecati quod laboriosam occaecati.
+
+![Photo of me](portrait.jpg)
+</code></pre>
+<p>The Markdown engine is <a href="https://parsedown.org/">Parsedown</a> with the <a href="https://github.com/erusev/parsedown-extra">Markdown Extra</a> extension. Links are automatically resolved and images are processed to create responsive tags for each so that content creation is as hassle free as possible.</p>
+<h3 id="p-03-pages_meta">Meta</h3>
+<p>The front matter, or meta, is processed as YAML by default but Papyrus supports defining it as either JSON or INI as well. Other flat-file CMS&apos;s, such as <a href="http://picocms.org/">Pico</a>, have opted to define the meta section by using three repeating dashes (<code>---</code>) which is how most static CMSs do it, so that&apos;s what&apos;s expected by default for compatibility&apos;s sake. However, you can just as well choose to define the section as a code block (<code>```</code>) which also allows you define a syntax highlighting (<code>```yml</code>). This was added for convenience sake in order to enable YAML highlighting in popular text-editors.</p>
+<p>There are also a couple of expected keys:</p>
+<ul>
+<li><strong>title</strong>: This is not strictly required but is used as fallback in many cases, for example if &quot;label&quot; isn&apos;t defined on a menu item.</li>
+<li><strong>template</strong>: Template configures what template from the theme the page should be loaded with. By default the compiler looks for one named &quot;page&quot;.</li>
+<li><strong>published</strong>: If missing the page is considered a draft and is hidden from feeds by default and content loaded via <code>ContentManager</code> and its helper functions.</li>
+<li><strong>language</strong>: If missing the language will be set to what&apos;s defined in the content config.</li>
+</ul>
+<h3 id="p-03-pages_page-properties">Page properties</h3>
+<p>The <code>Papyrus\Content\Page</code> class tries to only load data on-demand since a flat-file CMS application can otherwise get quite resource intensive if all pages are processed and kept in memory.</p>
+<p>All properties and meta can be accessed using array access as well as tested with the methods <code>has()</code> and <code>is()</code>, which performs empty and boolean tests respectively. One can also call a method prepended with the test method names like <code>$page-&gt;hasTitle()</code> to check whether the meta property <em>title</em> is empty or not. Here&apos;s a list of what properties are set by default (refer to the advanced documentation for how to add custom properties):</p>
+<ul>
+<li><strong>relativePath</strong> <em>(string)</em> - The file path relative from the content directory: <code>blog/index.md</code></li>
+<li><strong>id</strong> <em>(string)</em> - The unique identifier for the page: <code>/blog/index</code></li>
+<li><strong>route</strong> <em>(string)</em> - Id but without &quot;index&quot;: <code>/blog/</code></li>
+<li><strong>hashid</strong> <em>(string)</em> - MD5 hash of the id: <code>7e1889003e5094afa723d24be7ce1357</code></li>
+<li><strong>url</strong> <em>(string)</em> - Absolute URL to the page: <code>http://example.com/blog/</code></li>
+<li><strong>meta</strong> <em>(Soma\Store)</em> - All meta properties can also be accessed directly from <em>Page</em> object</li>
+<li><strong>html</strong> <em>(string)</em> - The rendered page contents</li>
+<li><strong>title</strong> <em>(string)</em> - Either the meta property or the filename if it&apos;s missing</li>
+<li><strong>keywords</strong> (array): Meta property or the top 10 keywords found from analyzing the content using <a href="https://github.com/Donatello-za/rake-php-plus">RakePlus</a>, unfortunately the library only supports the following language as of yet: en-US, es-AR, fr-FR, pl-PL, ru-RU</li>
+<li><strong>excerpt</strong> <em>(string)</em> - Meta property or the first paragraph of the page text</li>
+<li><strong>author</strong> <em>(string)</em> - Meta property or the config key <code>content.author</code></li>
+<li><strong>updated</strong> <em>(DateTime)</em> - Meta property or the file&apos;s modification time</li>
+<li><strong>modified</strong> <em>(DateTime)</em> - The file&apos;s modification time</li>
+<li><strong>language</strong> <em>(DateTime)</em> - Meta property or the config key <code>content.lang</code></li>
+<li><strong>draft</strong> <em>(bool)</em> - Whether the file is considered a draft or not, refer to the documentation further down for more information</li>
+<li><strong>image</strong> <em>(Papyrus\Content\Image)</em> - Meta property or the first image found in the rendered contents</li>
+<li><strong>images</strong> <em>(array of Papyrus\Content\Image)</em> - All images found in the rendered contents</li>
+<li><strong>raw</strong> <em>(string)</em> - The unprocessed file contents</li>
+<li><strong>bare</strong> <em>(string)</em> - The rendered page contents stripped from all HTML tags</li>
+<li><strong>body</strong> <em>(string)</em> - The unprocessed body section of the file</li>
+</ul>
+<p>The following are also inherited from <code>Papyrus\Content\File</code>:</p>
+<ul>
+<li><strong>filename</strong> <em>(string)</em> - Just the basename without the file extension: <code>index</code></li>
+<li><strong>basename</strong> <em>(string)</em> - The basename: <code>index.md</code></li>
+<li><strong>path</strong> <em>(string)</em> - The full file path: <code>/path/to/content/blog/index.md</code></li>
+<li><strong>extension</strong> <em>(string)</em> - The file extension: <code>md</code></li>
+<li><strong>directory</strong> <em>(string)</em> - The directory containing the file: <code>/path/to/content/blog</code></li>
+</ul>
+<p>Since the <em>Page</em> class can be extended with additional features one might need to inspect an instance using the <em>tinker</em> command to get a more correct representation of the properties available.</p>
+<pre><code class="lang-sh">php appctrl app:tinker
+</code></pre>
+<p>And then run <code>get_page(&apos;index&apos;);</code> &#x2013; or alternatively export and dump it on a web request: <code>dd(get_page(&apos;index&apos;)-&gt;export())</code>.</p>
+<h3 id="p-03-pages_filters">Filters</h3>
+<p>Some filters provide essential functionality while others merely add additional nice-to-haves. Custom ones can easily be created as well and the process is described in the advanced documentation.</p>
+<h4 id="p-03-pages_anchors">anchors</h4>
+<p>The anchor filter process links to other pages and static content and makes sure the URLs are set correctly.</p>
+<h4 id="p-03-pages_images">images</h4>
+<p>The filter processes all images and creates resized versions of each in order to be able to present them responsively to different devices.</p>
+<h4 id="p-03-pages_includes">includes</h4>
+<p>The includes filter append or prepend the markdown or rendered html with user specified content. Both the <em>markdown</em> and <em>html</em> keys support both <em>before</em> and <em>after</em>:</p>
+<pre><code class="lang-php">return [
+    // ...
+    &apos;includes&apos; =&gt; [
+        &apos;markdown&apos; =&gt; [
+            &apos;after&apos; =&gt; &apos;/signature.md&apos;,
+        ],
+        &apos;html&apos; =&gt; [
+            &apos;before&apos; =&gt; &apos;/ads/advertisement.html&apos;
+        ],
+    ],
+    // ...
+];
+</code></pre>
+<h4 id="p-03-pages_hashtags">hashtags</h4>
+<p>The hashtags filter searches the <em>page</em> contents for hashtags (e.g. #yolo) and wraps with an anchor the tag (&quot;yolo&quot;) prepended with a user defined route:</p>
+<pre><code class="lang-php">return [
+    // ...
+    &apos;tag-route&apos; =&gt; &apos;/tag?t=&apos;,
+    // ...
+];
+</code></pre>
+<h4 id="p-03-pages_heading-id">heading-id</h4>
+<p>Processes all the headings found in the page content and adds slugified ids.</p>
+<h4 id="p-03-pages_heading-offset">heading-offset</h4>
+<p>Processes all the page contents and sets what the topmost heading type should be in a page. So if you write your content using <code>h1</code> for your title and <code>heading-offset</code> is set to 2 then that heading will be converted into a <code>h3</code> and all subheadings will be converted respectively. This is so that themes that display content in different ways and hierarchy can still produce correct HTML. The configuration key should be set by the theme in its manifest:</p>
+<pre><code class="lang-yml">heading-offset: 2
+</code></pre>
+<h4 id="p-03-pages_shortcodes">shortcodes</h4>
+<p>Enable the processing of shortcodes in the page markdown.</p>
+<h4 id="p-03-pages_smartypants">smartypants</h4>
+<p><a href="https://daringfireball.net/projects/smartypants/">SmartyPants</a> is a library that translates plain ASCII punctuation characters into &quot;smart&quot; typographic punctuation HTML entities. It makes the typography of the rendered page contents more professional. There are edge-cases where the library doesn&apos;t work as it should, so if you find you&apos;re having trouble with how the pages render you may want to try turning this one off.</p>
+<p>One important thing to keep in mind is that a triple dash (<code>---</code>) is normally interpreted as an <code></code></p><hr> but SmartyPants interprets double dash as an en-dash (&#x2013;), therefore it&apos;s better to write hr&apos;s with a triple underscore (<code>___</code>) if using this filter.<p></p>
+<h3 id="p-03-pages_routing">Routing</h3>
+<p>There is no need to define any routes for Papyrus since it uses the filesystem to create the site hierarchy. A file named <code>contact.md</code> at the content root will be presented at <code>/contact</code> and a file in <code>writings/</code> called <code>my-first-essay.md</code> will be presented at <code>/writings/my-first-essay</code>. Any directory containing a file called <code>index.md</code> will be presented at the root of that directory (<code>/</code>). So if you want to create different content types you can simply create a folder called &quot;blog&quot;, create your blog posts as sub-resources and an index file as an archive.</p>
+<pre><code class="lang-text">-- blog/
+-- -- 201907/
+-- -- -- image.jpg
+-- -- -- my-first-post.md
+-- -- index.md
+-- index.md
+-- about.md
+-- contact.md
+</code></pre>
+<p>A file missing the <em>published</em> meta key will be treated as a draft and is not viewable unless drafts are enabled and <code>?preview=true</code> is added to the URL. If you prepend the file name with an underscore it will also be treated as a draft, e.g. <code>_my-first-post.md</code>, or if you set the meta property <code>draft: true</code>. If you have an underscored file with otherwise the same name as another file in the same folder it will be the unpublished draft of the live file. This is helpful since it allows you to work on a new revision of a file, and preview it, without accidentally publishing unfinished work. The draft is only presented if <code>?preview=true</code> otherwise the original is presented:</p>
+<pre><code class="lang-text">-- blog/
+-- -- 201907/
+-- -- -- image.jpg
+-- -- -- _my-first-post.md
+-- -- -- my-first-post.md
+-- -- index.md
+</code></pre>
+<p>If <em>published</em> is set to a future date it won&apos;t be considered published until the point in time has passed. You can also prepend folder names with an underscore to hide all content within. This is however not previewable:</p>
+<pre><code class="lang-text">-- blog/
+-- -- _unpublished-drafts/
+-- -- -- not-previewable.md
+</code></pre>
+<p>The file name &quot;default.md&quot; is reserved by the system as it&apos;s used as a template when programmatically creating new pages in the same directory.</p>
+<h3 id="p-03-pages_images">Images</h3>
+<p>Papyrus provides a system to automatically process all images and linked files within a page&apos;s content. Absolute URLs are kept as is but local images within the content directory gets resized and processed to save bandwidth and enable presenting the most suitable size for each device. Links to other pages gets their proper absolute URL and PDF:s and other static gets copied to a public directory so that they can be downloaded.</p>
+<p><code>Papyrus\Content\Image</code> can load images from either remotely or from a theme or content directory and they will be processed and moved to a public cache directory. On string conversion it turns into a HTML <em>img</em> tag but one can also change attributes by rendering it via the <em>display</em> method.</p>
+<pre><code class="lang-php">image(&apos;my-header.jpg&apos;)-&gt;display([&apos;alt&apos; =&gt; &apos;My Header&apos;]);
+</code></pre>
+<h3 id="p-03-pages_feed">Feed</h3>
+<p>You can easily define what content should be available in the site&apos;s main RSS feed using the <em>include</em> and <em>exclude</em> config keys. One can also define specific sub-feeds by setting the <em>feed</em> meta key: <code>feed: Pottery</code>. This will be available as a sub-resource: <code>http://www.example.com/feed/pottery</code>.</p>
+<p>The system has been designed with podcasting in mind, to be able to attach media resources to feed items, but as of now it&apos;s not yet implemented. Please express if you have a need for it and the feature will prioritized.</p>
+</body></html> </div> <div id="p-04-menus" class="tab-pane fade" role="tabpanel"> <html><head></head><body><h2 id="p-04-menus_menus">Menus</h2>
+<p>Menus are also created using YAML and resolved using dot-notation syntax. So if you want to load a menu at <code>menus/main.yml</code> you call <code>get_menu(&apos;menus.main&apos;)</code>. You can also create a master file in the content root called <code>menus.yml</code> and define multiple entries in this one file and access them as if each is a file in the content root:</p>
+<pre><code class="lang-yml">main:
+    # ...
+sidebar:
+    # ... 
+</code></pre>
+<p>The menu format is as follows. For each item you can either reference the file under <em>page</em> or manually specifying a <em>url</em>. Any unsupported key will be available for you as a key on each item, so you can easily define icons or any other property directly here in the file.</p>
+<p>A <em>page</em> key will be resolved into the following: <em>url</em> to the page, the <em>route</em>, and the <em>label</em> will be set to the page title unless label is already defined on the item.</p>
+<p>Any item can have the key <em>children</em> set which creates a hierarchy of items. Other ways to do so is by setting <em>list</em> and it will resolve a query for all pages under that route and populate <em>children</em>. When using <em>list</em> you can also set <em>sort</em> and <em>order</em>, as well as the <em>depth</em> that you want the query to process and if you want the result presented as a <em>flat</em> single level list rather than a hierarchy. One can also <em>limit</em> lists to only return a set number of items.</p>
+<p>Here is an example of what a menu file could look like:</p>
+<p><strong>main.yml</strong></p>
+<pre><code class="lang-yml">- page: /
+  label: Home
+- page: /about.md
+- page: /contact.md
+- url: &quot;http://github.com/john-doe&quot;
+  label: &quot;My GitHub&quot;
+- list: /blog/
+  depth: 2
+  flat: true
+  sort: published
+  order: desc
+  limit: 10
+  label: &quot;Recent blog posts&quot;
+- label: &quot;My other writings&quot;
+    children:
+      - list: /essays/
+        label: Essays
+      - url: &quot;http://example.com&quot;
+        label: &quot;My other site&quot;
+</code></pre>
+</body></html> </div> <div id="p-05-themes" class="tab-pane fade" role="tabpanel"> <html><head></head><body><h2 id="p-05-themes_themes">Themes</h2>
+<p>Perhaps controversially it&apos;s encouraged to include logic in the theme files and they can be installed, along with their dependencies, via composer. The theming engine is using a <a href="https://laravel.com/docs/5.1/blade">Blade</a> compiler by default and thereby allowing for heavy use of logic in the templates. The target audience of this project is primarily developers so instead of having to create custom plugins for minor and/or major features, everything can easily baked into the theme so that there&apos;s only one project the developer needs to worry about. One might prefer separating out the logic into a separate project and that can be done easily by providing them through a service.</p>
+<p>A typical theme would look something like this:</p>
+<pre><code class="lang-text">MyTheme/
+-- assets/
+-- -- images/
+-- -- -- logo.png
+-- -- js/
+-- -- -- main.js
+-- -- scss/
+-- -- -- main.scss
+-- dist/
+-- -- main.2ebbcecc.css
+-- -- main.2f2121f2.js
+-- -- logo.png
+-- layouts/
+-- -- bade.blade.php
+-- lib/
+-- -- MyThemeServiceProvider.php
+-- 404.blade.php
+-- contact.blade.php
+-- index.blade.php
+-- page.blade.php
+-- post.blade.php
+-- search.blade.php
+-- tag.blade.php
+-- composer.json
+-- package.json
+-- theme.yml
+</code></pre>
+<p>The only variables that gets set on a request and are available to the theme files are <code>$request</code>, an instance of <code>Symfony\Component\HttpFoundation\Request</code> for the current request, and <code>$page</code>, an instance of <code>Papyrus\Content\Page</code> for the current page. Everything else, all pages and menus, can be retrieved using simple helper functions or facades.</p>
+<p>You can either create a theme from <a href="https://github.com/soma-php/papyrus-theme">the boilerplate</a> or create everything from scratch. The <code>theme.yml</code> in the root of your theme defines where Papyrus can find the resources provided:</p>
+<pre><code class="lang-yml">name: MyTheme
+inherit: OtherTheme
+engine: blade
+public: ./dist
+templates: ./
+images:
+  filters: [&apos;\MyTheme\ImageFilter&apos;]
+  sizes: [&apos;576&apos;, &apos;768&apos;, &apos;992&apos;, &apos;1200&apos;]
+  rules: [&apos;(max-width: 576px) 576px&apos;, &apos;(max-width: 768px) 768px&apos;, &apos;992px&apos;]
+heading-offset: 2
+</code></pre>
+<p>The active theme is set by the config key <code>themes.active</code> and changing the theme requires running a <code>app:refresh</code> to update the filesystem links:</p>
+<pre><code class="lang-sh">php appctrl app:refresh
+</code></pre>
+<h3 id="p-05-themes_properties">Properties</h3>
+<h4 id="p-05-themes_inherit">inherit</h4>
+<p>The theme can inherit other themes and the parent themes will be searched recursively to find the requested template or asset. You can specify a specific theme&apos;s asset when including a file via the <code>theme_url</code> helper:</p>
+<pre><code class="lang-php">$parentCss = theme_url(&apos;main.css&apos;, &apos;ParentTheme&apos;);
+</code></pre>
+<h4 id="p-05-themes_engine">engine</h4>
+<p><em>engine</em> defines what compiler engine the theme is designed for. By default <code>blade</code> and <code>standard</code> are provided, the latter is simply including PHP or HTML files. You can easily add support for a custom template engine like <a href="https://twig.symfony.com/">Twig</a> via a service provider.</p>
+<h4 id="p-05-themes_public">public</h4>
+<p><em>public</em> will be linked to the public directory so that those files are made available. The active theme is set in <code>config/themes.php</code> and when it&apos;s changed you must run <code>php appctrl app:refresh</code>.</p>
+<h4 id="p-05-themes_templates">templates</h4>
+<p>The key <em>templates</em> is where the compiler engine will look for the templates requested. The default template that is selected when no template can be found is <code>page</code> so make sure to always define a <code>page.blade.php</code> template in your theme.</p>
+<h4 id="p-05-themes_images">images</h4>
+<p>Papyrus automatically creates resized version of images you link to within your markdown files and generates responsive HTML for it. You can under <em>images</em> define either a custom rule that gets mapped to the attribute <em>sizes</em> or define an array of sizes that each image is resized to (<em>rules</em> =&gt; sizes, <em>sizes</em> =&gt; srcset). Callable <em>filters</em> with the following definition can also be set:</p>
+<pre><code class="lang-php">function(\Papyrus\Content\Image $image) {
+
+    // ...
+
+    return $image;
+}
+</code></pre>
+<h4 id="p-05-themes_heading-offset">heading-offset</h4>
+<p>It&apos;s a key used by the <em>heading-offset</em> filter and sets what the topmost heading type will be in a page. So if you write your content using <code>h1</code> for your title and <code>heading-offset</code> is set to 2 then that heading will be converted into a <code>h3</code> and all subheadings will be converted respectively. This is so that themes that display content in different ways and hierarchy can still produce correct HTML.</p>
+<h3 id="p-05-themes_starter-theme">Starter theme</h3>
+<p>There&apos;s an MIT licensed Papyrus <a href="https://github.com/soma-php/papyrus-theme">starter theme</a> that implements a simple Bootstrap 4 layout and showcasing most features on which you can build your own.</p>
+</body></html> </div> <div id="p-06-commands" class="tab-pane fade" role="tabpanel"> <html><head></head><body><h2 id="p-06-commands_commands">Commands</h2>
+<p>Most commands available by default are provided by SOMA so please refer to its <a href="https://soma-php.github.io/">documentation</a> for more information.</p>
+<h3 id="p-06-commands_contentcompile">content:compile</h3>
+<pre><code class="lang-text">php appctrl content:compile {page?} {--force}
+</code></pre>
+<p>A page can be specified using a content directory relative path or if none are provided then all files in the content directory will be cache validated and recompiled if required.</p>
+<p>The <em>force</em> flag forces a recompilation.</p>
+<h3 id="p-06-commands_contentroutes">content:routes</h3>
+<pre><code class="lang-text">php appctrl content:routes
+</code></pre>
+<p>The command presents a formatted list of all publicy available route end-points. Route handles that are reserved by an external handler are marked with an appended ellipsis.</p>
+</body></html> </div> <div id="p-07-advanced" class="tab-pane fade" role="tabpanel"> <html><head></head><body><h2 id="p-07-advanced_advanced">Advanced</h2>
+<h3 id="p-07-advanced_services">Services</h3>
+<p>You can utilize the full functionality of SOMA and the rest of the PHP ecosystem to customize your installation. Look for other pre-made services that integrate new functionality into Papyrus or make your own. Refer to the <a href="https://soma-php.github.io/">SOMA documentation</a> for more information.</p>
+<h3 id="p-07-advanced_shortcodes">Shortcodes</h3>
+<p>Shortcodes are integrated using <a href="https://github.com/maiorano84/shortcodes">maiorano84/shortcodes</a> and is a simple way to create custom tags for your markdown files. Define the logic in a service provider that you register:</p>
+<pre><code class="lang-php">namespace MyTheme;
+
+use Soma\ServiceProvider;
+use Psr\Container\ContainerInterface;
+
+use Papyrus\ShortcodeManager;
+use Papyrus\Content\Shortcode;
+use Papyrus\Content\Page;
+
+class MyThemeProvider extends ServiceProvider
+{
+    public function getExtensions() : array
+    {
+        return [
+            &apos;content.shortcodes&apos; =&gt; function(ShortcodeManager $manager, ContainerInterface $c) {
+                $manager-&gt;register(new Shortcode(&apos;gallery&apos;, [&apos;type&apos;=&gt;&apos;masonry&apos;], function($content = null, array $atts = []) {
+                    // The attribute markdown=&quot;1&quot; enables
+                    // markdown processing inside a HTML tag
+                    return &quot;## My &quot;.$atts[&apos;type&apos;].&quot; Gallery \n\n&quot;.$content;
+                }));
+
+                return $manager;
+            },
+        ];
+    }
+}
+</code></pre>
+<p>This shortcode will then be available to use in your page files:</p>
+<pre><code class="lang-md">[gallery type=slideshow]
+![Me at the beach](&apos;me-at-the-beach.jpg&apos;)
+![My dog at the beach](&apos;dog-at-the-beach.jpg&apos;)
+[/gallery]
+</code></pre>
+<h3 id="p-07-advanced_routing">Routing</h3>
+<p>The built-in router supports custom route handlers that can either be defined in <code>config/content.php</code> or added programmatically in a <em>service provider</em>. They only need to callable and match the expected defintion. Make sure to return a boolean indicating if the request was handled by your code or not. If you want to create a class handling requests you can utilize the <code>__invoke</code> <a href="https://www.php.net/manual/en/language.oop5.magic.php#object.invoke">magic method</a>.</p>
+<pre><code class="lang-php">return [
+    &apos;title&apos; =&gt; &apos;My Site&apos;,
+    &apos;language&apos; =&gt; &apos;en_US&apos;,
+    &apos;router&apos; =&gt; [
+        &apos;disable&apos; =&gt; false,
+        &apos;handlers&apos; =&gt; [
+            &apos;/custom&apos; =&gt; function (string $uri, \Symfony\Component\HttpFoundation\Request $request) {
+
+                // ...
+
+                return true;
+            },
+        ],
+    ],
+];
+</code></pre>
+<h3 id="p-07-advanced_adding-page-features">Adding Page features</h3>
+<p>Any customization of the <code>Page</code> class should preferable be done as an extension of the <code>Filesystem</code> class so that everything is applied before any actual <em>page</em> processing takes place. One can register custom filters automatically if a theme or service depends on it and the properties and methods are added via macros. All of the default macros and filters can be overloaded.</p>
+<h4 id="p-07-advanced_pre-loaded-and-lazy-loaded-properties">Pre-loaded and lazy-loaded properties</h4>
+<p>Properties and methods can be added and made available on the <em>Page</em> class using macros. There are three types of macros, each with their own definition. The first is simply a method that can be called on the <em>Page</em> instance (e.g. <code>$page-&gt;greetPerson(&apos;John&apos;)</code>) and may have any number of parameters it may require:</p>
+<pre><code class="lang-php">Page::macro(&apos;greetPerson&apos;, function($person) {
+    return &apos;Hello &apos;.$person;
+});
+</code></pre>
+<p>The second type are <em>pre-loaded properties</em>. These are static in relation to the content and are saved as meta properties but requires some sort of processing of said content to be set. To indicate that the property is pre-loaded the method name should be prefixed with an underscore and the function will be passed <code>$html</code> and <code>$meta</code> since most properties aren&apos;t defined yet and trying to access them would cause a compilation recursion. One example is the property <code>$page-&gt;excerpt</code> that is included by default that either extracts the first content paragraph or the original meta property if it has been set:</p>
+<pre><code class="lang-php">Page::macro(&apos;_excerpt&apos;, function($html, $meta) {
+    if ($excerpt = $meta-&gt;get(&apos;excerpt&apos;)) {
+        $excerpt = Parsedown::instance()-&gt;text($excerpt);
+    }
+    else {
+        $first = strpos($html, &apos;<p'); $excerpt="substr($html," $first,="" strpos($html,="" '<="" p="">&apos;) - $first);
+        $excerpt = substr($excerpt, strpos($excerpt, &apos;&gt;&apos;) + 1);
+    }
+
+    return $excerpt;
+});
+</p');></code></pre>
+<p>The third type are <em>lazy-loaded properties</em>. These two are static in relation to the content since they will be cached for the duration of the request upon access but may return any type of instanced object since it won&apos;t be serialized and saved to file. To indicate that the property is lazy-loaded the method name should be suffixed with an underscore. This is the definition of <code>$page-&gt;images</code> that retrieves all the image files from the content body. Note how here it&apos;s safe to access the HTML using <code>$this-&gt;html</code>.</p>
+<pre><code class="lang-php">Page::macro(&apos;images_&apos;, function() {
+    $dom = new DOMDocument();
+    @ $dom-&gt;loadHTML(&apos;<div>&apos;.$this-&gt;html.&apos;</div>&apos;, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+    $imgs = $dom-&gt;getElementsByTagName(&apos;img&apos;);
+    $images = [];
+
+    if (! empty($imgs)) {
+        foreach ($imgs as $key =&gt; $img) {
+            try {
+                $src = $img-&gt;getAttribute(&apos;src&apos;);
+                $images[] = new Image($img-&gt;getAttribute(&apos;src&apos;), [
+                    &apos;alt&apos; =&gt; $img-&gt;getAttribute(&apos;alt&apos;),
+                    &apos;sizes&apos; =&gt; $img-&gt;getAttribute(&apos;sizes&apos;),
+                    &apos;srcset&apos; =&gt; $img-&gt;getAttribute(&apos;srcset&apos;),
+                    &apos;class&apos; =&gt; $img-&gt;getAttribute(&apos;class&apos;),
+                    &apos;id&apos; =&gt; $img-&gt;getAttribute(&apos;id&apos;),
+                    &apos;data&apos; =&gt; [&apos;size&apos; =&gt; $img-&gt;getAttribute(&apos;data-size&apos;)],
+                ]);
+            }
+            catch (Exception $e) {}
+        }
+    }
+
+    return $images;
+});
+</code></pre>
+<h4 id="p-07-advanced_mixins">Mixins</h4>
+<p>Mixins are classes that will be processed using reflection to register macros. This makes it easier to register a bunch of related functionality in one go and keeps your code more neatly organized. Since the scope can&apos;t be changed from one class to another in PHP, and <code>$this</code> should point to the <em>Page</em> instance just like an internal method, one must return a function from the method that will be registered with the method name:</p>
+<pre><code class="lang-php">namespace MyTheme;
+
+class MyMixin
+{
+    public function _preloadedProperty()
+    {
+        return function($html, $meta) {
+
+            // ...
+
+            return $preloaded;
+        };
+    }
+
+    public function lazyLoadedProperty_()
+    {
+        return function() {
+
+            // ...
+
+            return $lazyLoaded;
+        };
+    }
+
+    public function normalClassMethod()
+    {
+        return function ($param) {
+            
+            // ...
+
+            return $result;
+        };
+    }
+}
+
+</code></pre>
+<h4 id="p-07-advanced_custom-content-filters">Custom content filters</h4>
+<p>Upon page compilation the markdown and then the html gets passed through all of the configured filters. Since files only are compiled upon updates and won&apos;t run on each request these can do more performance intensive operations without impacting live site peformance.</p>
+<p>A filter can change the markdown prior to rendering, add or modify meta properties, and also process the resulting html after rendering. It must extend the <code>Papyrus\Content\Filter</code> abstract class.</p>
+<pre><code class="lang-php">namespace MyTheme;
+
+use SplFileInfo;
+use Soma\Store;
+use Papyrus\Content\Filter;
+
+class MyFilter extends Filter
+{
+    public function before(string $markdown, Store &amp;$meta, ?SplFileInfo $file)
+    {
+        // ..
+
+        return $markdown;
+    }
+
+    public function after(string $html, Store &amp;$meta, ?SplFileInfo $file)
+    {
+        // ...
+
+        return $html;
+    }
+}
+</code></pre>
+<p>Filters can also be run on strings if required, much like the Wordpress <code>do_shortcode</code> function call:</p>
+<pre><code class="lang-php">$html = filter_content(&apos;Random **markdown** formatted string with a [shortcode][/shortcode]&apos;);
+</code></pre>
+<h4 id="p-07-advanced_registering-these-using-a-service-provider">Registering these using a Service Provider</h4>
+<p>To ensure that all modifications are applied to <em>Page</em> before any content processing happens you should do so as an extension of the <em>Filesystem</em> class.</p>
+<pre><code class="lang-php">namespace MyTheme;
+
+use Soma\ServiceProvider;
+use Psr\Container\ContainerInterface;
+
+use Papyrus\Content\Page;
+use Papyrus\Content\Filesystem;
+
+use MyTheme\MyMixin;
+use MyTheme\MyFilter;
+
+class MyThemeProvider extends ServiceProvider
+{
+    public function getExtensions() : array
+    {
+        return [
+            &apos;content.filesystem&apos; =&gt; function(Filesystem $files, ContainerInterface $c) {
+                // Register macros using a mixin
+                Page::mixin(new MyMixin());
+
+                // Register a filter
+                Page::addFilter(&apos;my-filter&apos;, new MyFilter());
+                
+                return $files;
+            },
+        ];
+    }
+}
+</code></pre>
+<h3 id="p-07-advanced_performance">Performance</h3>
+<p>The system is designed to only load the pages absolutely necessary to present the current request. If no other pages are presented (not presenting a directory index), then only a single page will be cache validated and loaded into memory, and pages are only ever queried once. So getting the same pages in multiple locations doesn&apos;t impact filesystem or memory usage.</p>
+<p>In special cases, like when using the <em>Search</em> class to perform a full-text search, since only a subset of the total number of pages are what actually will be presented, the pages that won&apos;t be a part of the final result set gets unloaded.</p>
+<p>In addition to this, page meta and body are cached separately and loaded on demand. So iterating through pages and only displaying their titles will never load the HTML into memory. Since some properties need to process the file content to be set and returns a dynamic object Papyrus implements lazy-loading of such properties that are static in relation to file content but accessed using an instanced class.</p>
+<p>By default every page file that is new or updated will be recompiled on a request. That means that if the cache is cleared someone may experience a great performance hit on the next request, but since the cache always gets validated there shouldn&apos;t be a need to ever clear the cache. One way to mitigate this would be clearing the cache from a terminal command and then at the same time recompile everything in one go.</p>
+<p>The cache behavior can be adjusted as well. The config key <code>content.cache.ignore-mtime</code> disables checking the modification date of the file and modifies the system to only compile a page if the cache file is missing completely. To have the website still reflect content changes one would have to schedule a scan to periodically validate the cache and recompile a file if invalid. A command is provided to support this:</p>
+<pre><code class="lang-sh">php appctrl content:compile
+</code></pre>
+<p>The config key <code>content.cache.validate-visited</code> modifies that behavior to still validate the page being requested, so files other than the specific one requested, like in an archive, won&apos;t be recompiled until they are directly visited. Using these two keys in combination is the default and recommended configuration:</p>
+<pre><code class="lang-php">return [
+    // ...
+    &apos;cache&apos; =&gt; [
+        &apos;ignore-mtime&apos; =&gt; true,
+        &apos;validate-visited&apos; =&gt; true,
+    ],
+    // ...
+];
+</code></pre>
+<p>You can also configure an included <code>full-page</code> cache or set the correct headers for an HTTP <code>gateway</code> caching mechanism. So if you notice specific pages receiving more traffic you can choose to cache these specifically. When using this type of system one need to be careful to not cache content that is dynamic and dependent on a user session. Refer to the configuration documentation for more information.</p>
+<p>Another way to cache content on a presentation level is by installing a cache system in your theme (such as <code>nsrosenqvist/soma-cache</code>) and cache search results and archives so that it&apos;s not reloaded on each pagination.</p>
+</body></html> </div> <div id="p-08-api" class="tab-pane fade" role="tabpanel"> <html><head></head><body><h2 id="p-08-api_api">API</h2>
+<p>The API is still largely undocumented, it&apos;s a work in progress. However, Papyrus is a small project so it&apos;s quite easy to just refer to the <a href="https://github.com/soma-php/papyrus">project source</a> if you need to look up how to use any of the classes.</p>
+<h3 id="p-08-api_systems">Systems</h3>
+<p>Papyrus is organized into two subsystems, themes and content. When you register <code>Papyrus\Providers\PapyrusProvider</code> it also adds <code>Papyrus\Providers\ContentProvider</code> and <code>Papyrus\Providers\ThemesProvider</code> as well as the default SOMA event system. The <em>PapyrusProvider</em> and the <code>Papyrus\Papyrus</code> class simply connects the two independent systems and resolves the current request.</p>
+<h3 id="p-08-api_managers">Managers</h3>
+<p>The <em>ShortcodeManager</em> is just a wrapper around <a href="https://github.com/maiorano84/shortcodes">maiorano84/shortcodes</a> and all its features can be utilized by <em>ContentManager</em>. Almost everything is represented by a class in Papyrus and by using the <em>ContentManager</em> to load a <em>menu</em> or a <em>page</em> rather than simply creating an instance on your own you will have all system configuration and caching applied and handled for you automatically.</p>
+<p>The <em>helpers</em> are the recommended way for theme developers to interface with the <em>ContentManager</em> since as a developer you won&apos;t have to reference the fully namespaced class name or require the user to alias the class.</p>
+<p>The <em>ThemeManager</em> is utilized by Papyrus to render the response for the web request and would rarely, or if ever, need to be used by anyone manually. Instead there are helpers available and changing the active theme is done using a config file.</p>
+</body></html> </div> <div id="p-09-roadmap" class="tab-pane fade" role="tabpanel"> <html><head></head><body><h2 id="p-09-roadmap_roadmap">Roadmap</h2>
+<p>There is no official project roadmap as I&apos;m mostly scratching my own itch with this project and implement whatever I personally am in need of and have time for. However, here&apos;s a list of ideas that I&apos;m considering for the future.</p>
+<ul>
+<li><strong>Form shortcode</strong> - A form shortcode registered by default to enable easy inclusion of forms in pages. The forms would be defined using YAML and support submission through either a post request (to for example a Google Docs form) or by email to a configurable list of recipients.</li>
+<li><strong>Podcasting</strong> - The system has been designed with podcasting in mind, to be able to attach media resources to feed items, but as of now it&apos;s not yet implemented. Please express if you have a need for it and the feature will prioritized.</li>
+<li><strong>Admin GUI</strong> - I already have a proof of concept admin interface package that add a REST API and is built using Vue.js. However I have no personal need of this at the moment so I&apos;m not actively developing it.</li>
+<li><strong>Virtual Filesystem</strong> - Adding a virtual filesystem as a middle layer to minimize filesystem calls could provide significant performance increase when performing operations such as full-text search. However, doing so would require a significant rewrite of how the Page class loads and validates content as well as for how the Search class processes the pages, especially if both modes of operation should remain supported. Using such a system would likely require a periodical scheduled scan of the content directory to look for any new or updated files and that might warrant supporting both. Personally I don&apos;t suffer from any performance issues and I can&apos;t afford to spend time on a feature that I&apos;m not sure would be necessary, but I&apos;d be willing to prioritize this if a need is expressed.</li>
+</ul>
+<p>If you have any ideas of your own or are willing to work on any of the above, please get involved via the <a href="https://github.com/soma-php/papyrus/issues">issue tracker</a>.</p>
+</body></html> </div> <div id="p-99-helpers" class="tab-pane fade" role="tabpanel"> <html><head></head><body><h2 id="p-99-helpers_helpers">Helpers</h2>
+<p>The file <a href="https://github.com/soma-php/papyrus/blob/master/src/helpers.php">helpers.php</a> contain a couple of functions that are meant to simplify either calling app services or work with certain types of data. Please also refer to the <a href="https://github.com/soma-php/framework#helpers">helpers provided by SOMA</a>.</p>
+</body></html> <h3>Papyrus</h3> <ul> <li><a href="#p-99-helpers_response">response</a></li> <li><a href="#p-99-helpers_request">request</a></li> <li><a href="#p-99-helpers_current_url">current_url</a></li> <li><a href="#p-99-helpers_request_url">request_url</a></li> <li><a href="#p-99-helpers_request_vars">request_vars</a></li> <li><a href="#p-99-helpers_request_body">request_body</a></li> <li><a href="#p-99-helpers_request_uri">request_uri</a></li> <li><a href="#p-99-helpers_request_scheme">request_scheme</a></li> <li><a href="#p-99-helpers_request_host">request_host</a></li> <li><a href="#p-99-helpers_image">image</a></li> <li><a href="#p-99-helpers_content_path">content_path</a></li> <li><a href="#p-99-helpers_theme_path">theme_path</a></li> <li><a href="#p-99-helpers_theme_url">theme_url</a></li> <li><a href="#p-99-helpers_get_page">get_page</a></li> <li><a href="#p-99-helpers_query_pages">query_pages</a></li> <li><a href="#p-99-helpers_all_pages">all_pages</a></li> <li><a href="#p-99-helpers_search">search</a></li> <li><a href="#p-99-helpers_paginate">paginate</a></li> <li><a href="#p-99-helpers_filter_content">filter_content</a></li> <li><a href="#p-99-helpers_get_menu">get_menu</a></li> <li><a href="#p-99-helpers_get_feed">get_feed</a></li> <li><a href="#p-99-helpers_feed_url">feed_url</a></li> <li><a href="#p-99-helpers_markdown">markdown</a></li> <li><a href="#p-99-helpers_strip_bare">strip_bare</a></li> </ul> <hr> <h4 id="p-99-helpers_response"> <span class="font-weight-bold">response</span> <span class="text-muted"> : <i>\Symfony\Component\HttpFoundation\Response</i></span> </h4> <p class="lead font-italic text-muted">Simply create an HTTP response</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">integer</span> - <strong>[$code]</strong> </li> <li> <span class="text-muted font-italic">string</span> - <strong>[$content]</strong> </li> <li> <span class="text-muted font-italic">array</span> - <strong>[$headers]</strong> </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_response_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_response_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_response_code"> <pre><code class="lang-php">function response(int $code = 200, string $content = '', array $headers = []) : \Symfony\Component\HttpFoundation\Response
+{
+    $headers['content-type'] = $headers['content-type'] ?? 'text/plain';
+    $content = (is_string($content)) ? $content : json_encode($content);
+
+    return new \Symfony\Component\HttpFoundation\Response($content, $code, $headers);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_request"> <span class="font-weight-bold">request</span> <span class="text-muted"> : <i>\Symfony\Component\HttpFoundation\Request</i></span> </h4> <p class="lead font-italic text-muted">Return the current request object</p> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_request_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_request_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_request_code"> <pre><code class="lang-php">function request() : \Symfony\Component\HttpFoundation\Request
+{
+    return app('content.request');
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_current_url"> <span class="font-weight-bold">current_url</span> <span class="text-muted"> : <i>string</i></span> </h4> <p class="lead font-italic text-muted">Alias for request_url</p> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_current_url_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_current_url_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_current_url_code"> <pre><code class="lang-php">function current_url() : string
+{
+    return request_url();
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_request_url"> <span class="font-weight-bold">request_url</span> <span class="text-muted"> : <i>string</i></span> </h4> <p class="lead font-italic text-muted">Return the current request&#x27;s base URL and request URI</p> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_request_url_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_request_url_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_request_url_code"> <pre><code class="lang-php">function request_url() : string
+{
+    $request = app('content.request');
+
+    return $request->getSchemeAndHttpHost().$request->getBaseUrl().$request->getRequestUri();
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_request_vars"> <span class="font-weight-bold">request_vars</span> <span class="text-muted"> : <i>mixed</i></span> </h4> <p class="lead font-italic text-muted">Return the value of an HTTP parameter sent using any method</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">string</span> - <strong>$key</strong> </li> <li> <span class="text-muted font-italic">mixed</span> - <strong>[$default]</strong> </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_request_vars_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_request_vars_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_request_vars_code"> <pre><code class="lang-php">function request_vars(string $key, $default = null)
+{
+    return app('content.request')->get($key, $default);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_request_body"> <span class="font-weight-bold">request_body</span> <span class="text-muted"> : <i>string|resource</i></span> </h4> <p class="lead font-italic text-muted">Return the request body content or a resource to read the body stream</p> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_request_body_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_request_body_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_request_body_code"> <pre><code class="lang-php">function request_body()
+{
+    return app('content.request')->getContent();
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_request_uri"> <span class="font-weight-bold">request_uri</span> <span class="text-muted"> : <i>string</i></span> </h4> <p class="lead font-italic text-muted">Get the current request&#x27;s URI</p> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_request_uri_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_request_uri_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_request_uri_code"> <pre><code class="lang-php">function request_uri()
+{
+    return app('content.request')->getRequestUri();
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_request_scheme"> <span class="font-weight-bold">request_scheme</span> <span class="text-muted"> : <i>string</i></span> </h4> <p class="lead font-italic text-muted">Get the current request&#x27;s scheme</p> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_request_scheme_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_request_scheme_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_request_scheme_code"> <pre><code class="lang-php">function request_scheme()
+{
+    return app('content.request')->getScheme();
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_request_host"> <span class="font-weight-bold">request_host</span> <span class="text-muted"> : <i>string</i></span> </h4> <p class="lead font-italic text-muted">Get the current request&#x27;s host</p> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_request_host_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_request_host_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_request_host_code"> <pre><code class="lang-php">function request_host()
+{
+    return app('content.request')->getHttpHost();
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_image"> <span class="font-weight-bold">image</span> <span class="text-muted"> : <i>\Papyrus\Content\Image|null</i></span> </h4> <p class="lead font-italic text-muted">Create a \Papyrus\Content\Image instance from a filesystem resource</p> <p>Both remote and local files will be created as an Image instance and local files will first be queried from within the theme and if not found then from the content directory.</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">string|SplFileInfo</span> - <strong>$path</strong> - The filesystem location of the resource </li> <li> <span class="text-muted font-italic">array</span> - <strong>[$attr]</strong> - Optional override of image attributes </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_image_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_image_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_image_code"> <pre><code class="lang-php">function image($path, array $attr = []) : ?\Papyrus\Content\Image
+{
+    if ($path instanceof \Papyrus\Content\Image) {
+        return $path;
+    }
+    if ($path instanceof \SplFileInfo) {
+        $path = $path->getPathname();
+    }
+
+    try {
+        if (is_string($path)) {
+            if (is_url($path)) {
+                return new \Papyrus\Content\Image($path, $attr);
+            }
+            if (file_exists($themePath = theme_path($path))) {
+                return new \Papyrus\Content\Image($themePath, $attr);
+            }
+            if (file_exists($contentPath = content_path($path))) {
+                return new \Papyrus\Content\Image($contentPath, $attr);
+            }
+        }
+    }
+    catch (\Exception $e) {}
+
+    return null;
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_content_path"> <span class="font-weight-bold">content_path</span> <span class="text-muted"> : <i>string</i></span> </h4> <p class="lead font-italic text-muted">Get the full path to the content folder or a resource within</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">string</span> - <strong>[$path]</strong> - Either empty or a relative path to a resource within the content directory </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_content_path_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_content_path_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_content_path_code"> <pre><code class="lang-php">function content_path(string $path = '')
+{
+    return get_path('content').($path ? '/'.$path : $path);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_theme_path"> <span class="font-weight-bold">theme_path</span> <span class="text-muted"> : <i>string</i></span> </h4> <p class="lead font-italic text-muted">Get the full path to the active theme&#x27;s folder or a resource within</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">string</span> - <strong>[$path]</strong> - Either empty or a relative path to a resource within the theme&#x27;s directory </li> <li> <span class="text-muted font-italic">string|\Papyrus\Theme</span> - <strong>$theme</strong> - A specific theme to look within </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_theme_path_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_theme_path_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_theme_path_code"> <pre><code class="lang-php">function theme_path(string $path = '', $theme = null)
+{
+    return app('themes')->path($path, $theme);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_theme_url"> <span class="font-weight-bold">theme_url</span> <span class="text-muted"> : <i>string</i></span> </h4> <p class="lead font-italic text-muted">Get the full URL to the active theme&#x27;s folder or a resource within</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">string</span> - <strong>[$url]</strong> - Either empty or a relative path to a resource within the theme&#x27;s directory </li> <li> <span class="text-muted font-italic">string|\Papyrus\Theme</span> - <strong>$theme</strong> - A specific theme to look within </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_theme_url_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_theme_url_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_theme_url_code"> <pre><code class="lang-php">function theme_url(string $url = '', $theme = null)
+{
+    return app('themes')->url($url, $theme);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_get_page"> <span class="font-weight-bold">get_page</span> <span class="text-muted"> : <i>\Papyrus\Content\Page|null</i></span> </h4> <p class="lead font-italic text-muted">Get a \Papyrus\Content\Page from the content directory</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">string</span> - <strong>$id</strong> - Can be provided as a route or relative path </li> <li> <span class="text-muted font-italic">boolean</span> - <strong>[$drafts]</strong> - Determines whether drafts should be considered </li> <li> <span class="text-muted font-italic">boolean</span> - <strong>[$draftsOnly]</strong> </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_get_page_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_get_page_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_get_page_code"> <pre><code class="lang-php">function get_page(string $id, bool $drafts = false, bool $draftsOnly = false) : ?\Papyrus\Content\Page
+{
+    return app('content')->get($id, $drafts, $draftsOnly);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_query_pages"> <span class="font-weight-bold">query_pages</span> <span class="text-muted"> : <i>\Illuminate\Support\Collection</i></span> </h4> <p class="lead font-italic text-muted">Run a query against the filesystem</p> <p>Rather than just querying for a single file one can specify a directory and get all the files within.</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">string</span> - <strong>$query</strong> - Relative path or route </li> <li> <span class="text-muted font-italic">integer</span> - <strong>[$depth]</strong> - 0 ignores depth but a positive value limits the depth to which the filesystem will be searched </li> <li> <span class="text-muted font-italic">boolean</span> - <strong>[$drafts]</strong> - Determines whether drafts should be considered </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_query_pages_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_query_pages_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_query_pages_code"> <pre><code class="lang-php">function query_pages($query, $depth = 0, $drafts = false)
+{
+    return app('content.filesystem')->query($query, $depth, $drafts);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_all_pages"> <span class="font-weight-bold">all_pages</span> <span class="text-muted"> : <i>\Illuminate\Support\Collection</i></span> </h4> <p class="lead font-italic text-muted">Get all pages found within the content directory</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">boolean</span> - <strong>[$drafts]</strong> - Determines whether drafts should be considered </li> <li> <span class="text-muted font-italic">boolean</span> - <strong>[$draftsOnly]</strong> </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_all_pages_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_all_pages_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_all_pages_code"> <pre><code class="lang-php">function all_pages($drafts = false, $draftsOnly = false)
+{
+    return app('content')->all($drafts, $draftsOnly);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_search"> <span class="font-weight-bold">search</span> <span class="text-muted"> : <i>\Papyrus\Content\Search</i></span> </h4> <p class="lead font-italic text-muted">Perform a full-text search of the provided terms</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">string</span> - <strong>$terms</strong> - The terms to search for </li> <li> <span class="text-muted font-italic">array|\Illuminate\Support\Collection</span> - <strong>[$pages]</strong> - A subset of pages to search through </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_search_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_search_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_search_code"> <pre><code class="lang-php">function search(string $terms, $pages = null) : \Papyrus\Content\Search
+{
+    return app('content')->search($terms, $pages);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_paginate"> <span class="font-weight-bold">paginate</span> <span class="text-muted"> : <i>\Papyrus\Content\Pagination</i></span> </h4> <p class="lead font-italic text-muted">Paginate a set of pages</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">array|\Illuminate\Support\Collection</span> - <strong>[$pages]</strong> - An optional subset of pages to paginate </li> <li> <span class="text-muted font-italic">integer</span> - <strong>[$limit]</strong> - Number of items per page </li> <li> <span class="text-muted font-italic">integer</span> - <strong>[$page]</strong> - Current page number </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_paginate_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_paginate_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_paginate_code"> <pre><code class="lang-php">function paginate($pages = null, $limit = null, $page = null) : \Papyrus\Content\Pagination
+{
+    return app('content')->paginate($pages, $limit, $page);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_filter_content"> <span class="font-weight-bold">filter_content</span> <span class="text-muted"> : <i>string</i></span> </h4> <p class="lead font-italic text-muted">Run string through the configured \Papyrus\Content\Page filters</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">string</span> - <strong>$content</strong> </li> <li> <span class="text-muted font-italic">array|\Soma\Store</span> - <strong>[$meta]</strong> </li> <li> <span class="text-muted font-italic">SplFileInfo</span> - <strong>[$file]</strong> </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_filter_content_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_filter_content_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_filter_content_code"> <pre><code class="lang-php">function filter_content(string $content, $meta = [], $file = null) : string
+{
+    return \Papyrys\Content\Page::filter($content, $meta, $file);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_get_menu"> <span class="font-weight-bold">get_menu</span> <span class="text-muted"> : <i>\Papyrus\Content\Menu</i></span> </h4> <p class="lead font-italic text-muted">Get a configured menu</p> <p>If the menu doesn't exist an empty \Papyrus\Content\Menu instance will be created</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">string</span> - <strong>$id</strong> </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_get_menu_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_get_menu_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_get_menu_code"> <pre><code class="lang-php">function get_menu(string $id) : \Papyrus\Content\Menu
+{
+    return app('content')->menu($id);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_get_feed"> <span class="font-weight-bold">get_feed</span> <span class="text-muted"> : <i>\Papyrus\Content\Feed</i></span> </h4> <p class="lead font-italic text-muted">Get a \Papyrus\Content\Feed</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">string</span> - <strong>[$type]</strong> - Get specific feed type </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_get_feed_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_get_feed_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_get_feed_code"> <pre><code class="lang-php">function get_feed(?string $type = null) : \Papyrus\Content\Feed
+{
+    return app('content')->getFeed($type);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_feed_url"> <span class="font-weight-bold">feed_url</span> <span class="text-muted"> : <i>string</i></span> </h4> <p class="lead font-italic text-muted">Get a feed URL</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">string</span> - <strong>[$type]</strong> - Get specific feed type </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_feed_url_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_feed_url_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_feed_url_code"> <pre><code class="lang-php">function feed_url(?string $type = null) : string
+{
+    return app('content')->feedUrl($type);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_markdown"> <span class="font-weight-bold">markdown</span> <span class="text-muted"> : <i>string</i></span> </h4> <p class="lead font-italic text-muted">Parse a markdown formatted string</p> <p>If you want to parse a string according to the same rules as \Papyrus\Content\Page then you should rather use filter_content.</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">string</span> - <strong>$text</strong> </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_markdown_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_markdown_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_markdown_code"> <pre><code class="lang-php">function markdown(string $text) : string
+{
+    return \ParsedownExtra::instance()->text($text);
+}</code></pre> </div> <hr> <h4 id="p-99-helpers_strip_bare"> <span class="font-weight-bold">strip_bare</span> <span class="text-muted"> : <i>string</i></span> </h4> <p class="lead font-italic text-muted">Strip text completely bare from HTML and special characters</p> <h5>Parameters</h5> <ul> <li> <span class="text-muted font-italic">string</span> - <strong>$html</strong> </li> <li> <span class="text-muted font-italic">boolean</span> - <strong>[$newLines]</strong> - By default newlines are stripped but this can be turned off </li> </ul> <a class="pb-1 d-block" data-toggle="collapse" href="#p-99-helpers_strip_bare_code" role="button" aria-expanded="false" aria-controls="p-99-helpers_strip_bare_code"> Toggle Code </a> <div class="collapse" id="p-99-helpers_strip_bare_code"> <pre><code class="lang-php">function strip_bare(string $html, bool $newLines = true) : string
+{
+    // Add a space to each tag before stripping them
+    $html = str_replace('<', '="" <',="" $html);="" $string="strip_tags($html);" if="" ($newLines)="" {="" ',="" $string);="" }="" else="" \h+="" Remove="" special="" characters="" urls="" $regex="@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@" ;="" $bare="preg_replace($regex," return="" trim($bare);="" }<="" code=""></',></code></pre> </div> </div> </div> </div> </div> </div> </section> </main> <footer id="footer" class="section-p py-4"> <div class="copyright text-center text-muted"> &copy; 2020 &mdash; <a href="https://nsrosenqvist.github.io/" target="_blank">Niklas Rosenqvist</a> </div> </footer> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" integrity="sha256-L504iuNgIbVl3VZnwnG/kFzI8QdrCmYYtuT0Pxe2c/0=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script> <script>anchors.add();</script> <script src="https://soma-php.github.io/papyrus/main.a1379b27.js"></script> </body></html>
