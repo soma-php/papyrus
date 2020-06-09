@@ -11,6 +11,10 @@ It's built using the [SOMA framework](https://github.com/soma-php/soma/) and pro
 
 ___
 
+# Documentation
+
+Documentation is available on the [website](https://soma-php.github.io/papyrus).
+
 # License
 
 MIT
