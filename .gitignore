@@ -1,7 +1,0 @@
-.gitkeep
-vendor
-.env
-.cache
-*.tmp
-.vscode
-deploy.php
