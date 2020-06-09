@@ -15,7 +15,7 @@
         "php": ">=7.4.0",
         "ext-gd": "*",
         "ext-xml": "*",
-        "soma/soma": "^1.0",
+        "soma/soma": "^1.0.1",
         "nsrosenqvist/blade-compiler": "^7.0",
         "symfony/http-foundation": "^5.0",
         "erusev/parsedown": "^1.7",
