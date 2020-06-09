@@ -1,0 +1,13 @@
+# Introduction
+
+Why yet another markdown CMS, you ask? I want my publishing experience to be as hassle free as possible. Writing a blog post should be as simple as editing a Word document and having it automatically backup to the cloud. When I add an image to a blog post I shouldn't have to preprocess and resize it but the program should to take care of that for me. I also want the coding experience to be enjoyable and not having to dread adding features or fixing bugs on the website. 
+
+The target audience of this project is primarily developers so instead of having to create custom plugins for minor and/or major features, everything can be easily baked into the theme so that there's only one project the developer needs to worry about. Perhaps controversially it's encouraged to include logic in the theme files and they can be installed, along with their dependencies, via [composer](https://getcomposer.org/), making the entire PHP ecosystem at the theme developer's disposal (although one can still separate out the logic and integrate it using a service provider if one would prefer doing so).
+
+From personal experience, the real headache for smaller teams is not having logic mixed in with presentation but having to maintain separate repositories, keeping them in sync, and especially keeping presentation and content easiliy migratable and not dependent on each other. In Wordpress, pushing an update from one environment to another involves updating the site configuration and content, and pushing plugins and theme changes. The former two are entangled in one database, and the latter two are kept at different repositories but are entirely dependent on each other. Separating the concerns more simply between, *code*, *configuration* and *content*, in my opinion makes for a simpler more enjoyable developer experience.
+
+So that was the motivation and requirements of the project. I'm sure it's not up to all coding standards or best practices but Papyrus satisfies all of the requirements for me and I'm releasing it in case it can be of benefit to someone else as well. Thanks for checking it out!
+
+## SOMA
+
+SOMA is a framework that evolved while creating Papyrus. It's designed to provide the bare minimum and allow the developer to pick and choose components modularly, but still provide all modern conveniences to the workflow. So it's the very core of Papyrus and therefore it'd be good to quickly read through its [documentation](https://soma-php.github.io/) as well to understand how it works, especially how service providers are implemented.

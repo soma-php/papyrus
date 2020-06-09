@@ -1,0 +1,28 @@
+{
+    "name": "soma/papyrus",
+    "license": "MIT",
+    "description": "Papyrus is a PHP flat file CMS, built for developers to allow them to quickly publish and iterate on websites.",
+    "homepage": "https://github.com/soma-php/papyrus",
+    "autoload": {
+        "psr-4": {
+            "Papyrus\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "require": {
+        "php": ">=7.4.0",
+        "ext-gd": "*",
+        "ext-xml": "*",
+        "soma/soma": "^1.0",
+        "nsrosenqvist/blade-compiler": "^7.0",
+        "symfony/http-foundation": "^5.0",
+        "erusev/parsedown": "^1.7",
+        "erusev/parsedown-extra": "^0.7.1",
+        "intervention/image": "^2.5",
+        "maiorano84/shortcodes": "^1.2",
+        "donatello-za/rake-php-plus": "^1.0",
+        "michelf/php-smartypants": "^1.8"
+    }
+}
